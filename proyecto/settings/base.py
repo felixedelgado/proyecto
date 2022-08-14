@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-er%3a&n00amtw6vpjtekz&=$%4r!k9wbhqu=h!2q+32cyzybq4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*.herokuapp.com', 'dev-proyect.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'home',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +122,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'staticfiles'),
     os.path.join(os.path.dirname(BASE_DIR), 'static'),
 )
 
