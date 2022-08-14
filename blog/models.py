@@ -2,6 +2,7 @@ from distutils.command.upload import upload
 from turtle import update
 from django.db import models
 from django.conf import settings
+from django.db.models.deletion import CASCADE
 # Create your models here.
 
 class Post(models.Model):
