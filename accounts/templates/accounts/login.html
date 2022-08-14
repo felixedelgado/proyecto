@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Bienvenido a nuestro login page</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for messages in messages %}
+            <li {% if messages.tags %} class="{{ messages.tags }}" {% endif %}>{{ messages }}</li>
+            {% endfor%}
+        </ul>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <h2>Usted esta logeado como {{ user.username }}</h2>
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+        <a href="{% url 'index' %}">Volver a inicio</a>
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Iniciar sesión</button>
+    </form>
+</body>
+</html>
