@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block conten %}
+{% for posts in posts %}
+    <div class="card border-success mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-success">{{ posts.title }}</div>
+        <div class="card-body text-success">
+        <!-- <h5 class="card-title">Success card title</h5> -->
+        <p class="card-text">
+                {{ posts.content }}
+        </p>
+        </div>
+        <div class="card-footer bg-transparent border-success">{{ posts.user }}</div>
+    </div>
+{% endfor %}
+<!-- <div class="container">
+    {% for posts in posts %}
+    {{ posts }}
+    {% endfor %}
+</div> -->
+{% endblock %}
