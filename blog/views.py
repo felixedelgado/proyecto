@@ -1,13 +1,14 @@
 from email import message
-from django.shortcuts import render, redirect
+from gc import get_objects
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Post
 from .form import PostForm
 # Create your views here.
 
 def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'blog/blog_list.html', {'posts': posts})
+    post = Post.objects.all()
+    return render(request, 'blog/blog_list.html', {'post': post})
 
 def post_create(request):
     form = PostForm()
@@ -22,3 +23,16 @@ def post_create(request):
         messages.error(request, 'Hay errores en el Post')
     form = PostForm()
     return render(request, 'blog/blog_create.html', {'form': form})
+
+def post_update(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    form = PostForm(request.POST, instance=post)
+    if form.is_valid():
+        form.save()
+        return redirect('post_list')
+    return render(request, 'blog/blog_update.html', {'form': form, 'post': post})
+
+def post_delete(resquest, pk):
+    post = get_object_or_404(Post, id=pk)
+    post.delete()
+    return redirect('post_list')
