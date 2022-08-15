@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -59,9 +60,7 @@
         </nav>
     {% endblock %}
     {% block conten %}
-        <div class="contrainer">
-            <h1>Pagina de inicio por defecto {{ user }}</h1>
-        </div>
+
     {% endblock %}
 
     {% block nav %}

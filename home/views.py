@@ -9,5 +9,5 @@ from django.shortcuts import render, HttpResponse
 #     return HttpResponse('Hola Mundo')
 #     # return HttpResponse('Hola Mundo', posts)
 
-def index(resquest):
-    return render(resquest, 'home/index.html')
+def index(request):
+    return render(request, 'home/index.html')
