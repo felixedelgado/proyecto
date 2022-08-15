@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .form import LoginForm
 from django.contrib import messages
+# from django.contrib.auth.forms import UserCreationForm
+from .form import SignUpForm
 
 # Create your views here.
 def login_view(request):
@@ -27,3 +29,13 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+def registrar_user(request):
+    form = SignUpForm()
+    if request.method== 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            messages.success(request, 'Usuario creado!')
+            return redirect('login')
+    return render(request, 'accounts/register.html', {'form': form})
