@@ -18,12 +18,12 @@ import datetime
 #     }
 #     return HttpResponse(template.render(context, request))
 
-def saludo(request, horas):
-    now = datetime.datetime.now()
-    hora = now +datetime.timedelta(hours=horas)
-    context ={
-        'hora': now,
-        'adelantado' : hora,
-        'valor' : horas
-    }
-    return render(request, "saludo.html", context)
+# def saludo(request, horas):
+#     now = datetime.datetime.now()
+#     hora = now +datetime.timedelta(hours=horas)
+#     context ={
+#         'hora': now,
+#         'adelantado' : hora,
+#         'valor' : horas
+#     }
+#     return render(request, "saludo.html", context)

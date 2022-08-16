@@ -1,0 +1,22 @@
+.body {
+    /* background:radial-gradient(center center, ellipse, white 25%, peru 66%, black 96%); */
+    /* background-color: black; */
+    /* background:linear-gradient(1deg, #0000ff, #ff00ff); */
+    background:linear-gradient(90deg, #6f5bc57e, #4b4bd318);
+}
+
+.style-transpa {
+    background-color: transparent !important;
+}
+
+.miclass-footer {
+    text-align: justify;
+}
+
+.inicio-style {
+    background-image: url(logo.png);
+    background-repeat: no-repeat;
+	/* background-size: 300px; */
+    width: 501px;
+    height: 501px;
+}

@@ -6,27 +6,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Texo{% endblock %}</title>
+    <title>{% block title %}Inicio | Hechos con Alma{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     {% endblock %}
     {% block extracss %}
 
     {% endblock %}
 </head>
-<body>
+<body class="body">
 
     {% block menu %}
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg bg-light style-transpa">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <img src="static/img/logo.png" class="navbar navbar-header navbar-brand" usemap="#logo_1" ALIGN=LEFT WIDTH=55 HEIGHT=65>
+                <map name="logo_1">
+                    <area shape="cirle" coords="0, 0, 0" href="{% url 'index' %}" alt="">
+                    <area shape="default" href="{% url 'index' %}" alt="">
+                </map>
+                <a class="navbar-brand text-success" href="{% url 'index' %}">HECHOS CON ALMA</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'post_list' %}">Blogs</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,8 +67,111 @@
             </div>
         </nav>
     {% endblock %}
-    {% block conten %}
 
+    {% block conten %}
+    <div class="mx-auto cabeza inicio-style">
+    </div>
+    <div class="card mx-auto my-3" style="width: 75%;">
+        <div class="card-body">
+            <h5 class="card-title">Que llevan a cabo actualmente</h5>
+            <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+            <p class="card-text"><i class="bi bi-bookmark-check"></i> Elaboración y venta de productos de limpiezas para recaudar fondos.</p>
+            <p class="card-text"><i class="bi bi-bookmark-check"></i> Huerta agroecológica para suministrar alimentos a un asilo de ancianos y dar
+                sustento al comedor o a las familias que lo soliciten.</p>
+            <p class="card-text"><i class="bi bi-bookmark-check"></i> Acompañamiento en duelo con profesionales , dando charlas y reuniones.</p>
+            <p class="card-text"><i class="bi bi-bookmark-check"></i> Comedor y Merendero.</p>
+            <!-- <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a> -->
+        </div>
+    </div>
+
+
+    <div class="mx-auto my-3" style="width: 75%;">
+        <div class="card border-primary mb-3" style="max-width:100%;">
+            <div class="card-header">Visión y Misión</div>
+            <div class="card-body text-primary">
+            <h5 class="card-title">Visión</h5>
+            <p class="card-text">
+                Es ver que las personas que trascendieron el dolor, por medio de la fé y el amor de Dios,
+                encuentren su propósito para compartirlo con el prójimo.
+            </p>
+            </div>
+            <div class="card-body text-primary">
+                <h5 class="card-title">Misión</h5>
+                <p class="card-text">
+                    Llevar la palabra de Dios estableciendo relaciones con el prójimo en un merendero infantil, y
+                    acercarnos a personas que hayan sufrido pérdidas, por medio de visitas personales, charlas
+                    y acompañamiento y acompañamiento profesional.Buscan contribuir a la formación de
+                    ciudadanos más empáticos y comprometidos con la comunidad.
+                </p>
+                </div>
+        </div>
+    </div>
+    <div class="mx-auto" style="width: 75%;">
+        <div class="card border-primary mb-3 " style="max-width:100%;">
+            <div class="card-header">Objetivos</div>
+            <div class="card-body text-primary">
+                <h5 class="card-title">Objetivos</h5>
+                <p class="card-text">
+                    Crear un espacio de contención y superación (económica, cultural, educativa, moral,
+                    social) principalmente destinada a niños y adolescentes más vulnerables de nuestra
+                    comunidad de Gral. San Martin, Chaco con acompañamiento del grupo familiar.
+                </p>
+            </div>
+            <div class="card-body text-primary">
+                <!-- <h5 class="card-title">Misión</h5> -->
+                <p class="card-text">
+                    Propender a la Institución social de la población indicada (niños, jóvenes y su grupo
+                    familiar) fomentando actividades de diversa índole tales como: alimentación
+                    adecuada, a través del funcionamiento de un merendero, control nutricional y ayudas
+                    económicas (para la obtención de alimentos y medicamentos), educativas,
+                    culturales y recreativas, con apoyo escolar, enseñanza de artes (dibujo, pintura,
+                    danzas), talleres y oficios (construcción, peluquería, realización de artesanías,
+                    panadería, etc) controles médicos, odontológicos y psicológicos, ayuda moral o
+                    espiritualidad.
+                </p>
+            </div>
+            <div class="card-body text-primary">
+                <!-- <h5 class="card-title">Misión</h5> -->
+                <p class="card-text">
+                    Realizar diversos eventos recreativos y culturales, que propendan a la mayor
+                    integración entre los miembros de la comunidad especialmente vulnerable,
+                    reforzando los lazos de solidaridad y cooperación, entre los mismos y el resto de la
+                    comunidad de Gral. San Martín Chaco.
+                </p>
+            </div>
+            <div class="card-body text-primary">
+                <!-- <h5 class="card-title">Misión</h5> -->
+                <p class="card-text">
+                    Impulsar la integración de distintas comunidades generando ámbitos de
+                    capacitación para el desarrollo integral de las personas, especialmente en oficios
+                    que les brinden una salida laboral a corto plazo para lograr el desarrollo del hombre
+                    y su grupo familiar en los aspectos de infraestructura, salud, educación, deporte,
+                    viviendas, cloacas, comedores y trabajo en sectores vulnerables a fin de rescatar la
+                    dignidad de las personas.
+                </p>
+            </div>
+            <div class="card-body text-primary">
+                <!-- <h5 class="card-title">Misión</h5> -->
+                <p class="card-text">
+                    Acordar con organismos especializados , oficiales y/o particulares, municipales,
+                    provinciales, nacionales o del extranjero, el intercambio de políticas, información,
+                    recursos humanos, financieros o de otra índole que sean conducentes a alcanzar
+                    por medios lícitos el mejoramiento de la calidad de vida de personas con
+                    necesidades básicas insatisfechas.
+                </p>
+            </div>
+            <div class="card-body text-primary">
+                <!-- <h5 class="card-title">Misión</h5> -->
+                <p class="card-text">
+                    Gestionar y celebrar acuerdos o convenios con entidades, personas, equipos de
+                    investigación, universidades públicas o privadas, centro de estudios a nivel terciario
+                    superior, administrar proyectos de investigación y de desarrollo y otras actividades
+                    relacionadas con su objeto.
+                </p>
+            </div>
+        </div>
+    </div>
     {% endblock %}
 
     {% block nav %}
@@ -72,16 +183,14 @@
         <footer class="text-center text-lg-start bg-white text-muted">
             <!-- Section: Social media -->
             <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-            <!-- Left -->
-                <div class="me-5 d-none d-lg-block">
+
+                <!-- <div class="me-5 d-none d-lg-block">
                     <span>Get connected with us on social networks:</span>
                 </div>
-            <!-- Left -->
 
-            <!-- Right -->
                 <div>
                     <a href="" class="me-4 link-grayish">
-                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-facebook-f"></i> facebook
                     </a>
                     <a href="" class="me-4 link-grayish">
                     <i class="fab fa-twitter"></i>
@@ -98,8 +207,8 @@
                     <a href="" class="me-4 link-grayish">
                     <i class="fab fa-github"></i>
                     </a>
-                </div>
-            <!-- Right -->
+                </div> -->
+
             </section>
             <!-- Section: Social media -->
             <!-- Section: Links  -->
@@ -111,11 +220,10 @@
                         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                             <!-- Content -->
                             <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3 text-grayish"></i>Company name
+                            <i class="fas fa-gem me-3 text-grayish"></i>Acerca de Hechos con Alma
                             </h6>
-                            <p>
-                                Here you can use rows and columns to organize your footer content. Lorem ipsum
-                                dolor sit amet, consectetur adipisicing elit.
+                            <p class="miclass-footer">
+                                Esta formado por personas con la convicción de que el camino es el amor y que es necesario ver al prójimo con los ojos de Dios, de esa manera se puede lograr una transformación tanto en el que brinda ayuda como en el que la recibe.
                             </p>
                         </div>
                     <!-- Grid column -->
@@ -124,20 +232,20 @@
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                             <!-- Links -->
                             <h6 class="text-uppercase fw-bold mb-4">
-                            Products
+                            Redes
                             </h6>
                             <p>
-                                <a href="#!" class="text-reset">Angular</a>
+                                <a href="https://www.facebook.com/Hechoss-con-Alma-106138340788976/?__tn__=C-R" class="text-reset"><i class="bi bi-facebook fas fa-home me-3 text-grayish"></i>Hechos con Alma</a>
                             </p>
                             <p>
-                                <a href="#!" class="text-reset">React</a>
+                                <a href="https://www.instagram.com/Hechoscon_alma/" class="text-reset"><i class="bi bi-instagram fas fa-home me-3 text-grayish"></i>@Hechocon_alma</a>
                             </p>
-                            <p>
+                            <!-- <p>
                                 <a href="#!" class="text-reset">Vue</a>
-                            </p>
-                            <p>
+                            </p> -->
+                            <!-- <p>
                                 <a href="#!" class="text-reset">Laravel</a>
-                            </p>
+                            </p> -->
                         </div>
                 <!-- Grid column -->
         
@@ -145,34 +253,41 @@
                         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                             <!-- Links -->
                             <h6 class="text-uppercase fw-bold mb-4">
-                                Useful links
+                                Links
                             </h6>
                             <p>
-                                <a href="#!" class="text-reset">Pricing</a>
+                                <a href="{% url 'post_list' %}" class="text-reset"><i class="bi bi-postage fas fa-home me-3 text-grayish"></i>Blogs</a>
+                            </p>
+                            {% if request.user.is_authenticated %}
+                            <p>
+                                <a href="{#{% url 'my_post_list' %}#}" class="text-reset"><i class="bi bi-postage fas fa-home me-3 text-grayish"></i>Mis Blogs</a>
                             </p>
                             <p>
-                                <a href="#!" class="text-reset">Settings</a>
+                                <a href="{% url 'logout' %}" class="text-reset"><i class="bi bi-person-dash fas fa-home me-3 text-grayish"></i>Cerrar sesión</a>
+                            </p>
+                            {% else %}
+                            <p>
+                                <a href="{% url 'login' %}" class="text-reset"><i class="bi bi-person-check fas fa-home me-3 text-grayish"></i>Iniciar sesión</a>
                             </p>
                             <p>
-                                <a href="#!" class="text-reset">Orders</a>
+                                <a href="{% url 'registrar_user' %}" class="text-reset"><i class="bi bi-person-plus fas fa-home me-3 text-grayish"></i>Regístrate</a>
                             </p>
-                            <p>
-                                <a href="#!" class="text-reset">Help</a>
-                            </p>
+                            {% endif%}
+
                         </div>
                 <!-- Grid column -->
         
                 <!-- Grid column -->
                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                             <!-- Links -->
-                            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                            <p><i class="fas fa-home me-3 text-grayish"></i> New York, NY 10012, US</p>
+                            <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
+                            <p><i class="fas fa-home me-3 text-grayish bi bi-pin-map"></i> Calle Ayacucho Nº430.<br> Gral. José de San Martín, Chaco.</p>
                             <p>
-                                <i class="fas fa-envelope me-3 text-grayish"></i>
+                                <i class="fas fa-envelope me-3 text-grayish bi bi-envelope"></i>
                                 info@example.com
                             </p>
-                            <p><i class="fas fa-phone me-3 text-grayish"></i> + 01 234 567 88</p>
-                            <p><i class="fas fa-print me-3 text-grayish"></i> + 01 234 567 89</p>
+                            <p><i class="fas fa-phone me-3 text-grayish bi bi-telephone"></i> +54 3725-455384 </p>
+                            <!-- <p><i class="fas fa-print me-3 text-grayish"></i> + 01 234 567 89</p> -->
                         </div>
                 <!-- Grid column -->
                     </div>
@@ -183,8 +298,7 @@
 
             <!-- Copyright -->
             <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
-                © 2021 Copyright:
-                <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                <a class="text-reset fw-bold" href="{% url 'index' %}">Hechos con Alma</a>
             </div>
             <!-- Copyright -->
         </footer>
