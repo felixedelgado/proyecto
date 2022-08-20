@@ -20,3 +20,27 @@
     width: 501px;
     height: 501px;
 }
+
+.logo-11 {
+    background-image: url(logo.png);
+    background-repeat: no-repeat;
+    background-size: 55px 55px;
+    width: 55px;
+    height: 55px;
+    border-top-left-radius: 50% 50%;
+    border-top-right-radius: 50% 50%;
+    border-bottom-right-radius: 50% 50%;
+    border-bottom-left-radius: 50% 50%;
+}
+
+.link-11 {
+    border-top-left-radius: 50% 50%;
+    border-top-right-radius: 50% 50%;
+    border-bottom-right-radius: 50% 50%;
+    border-bottom-left-radius: 50% 50%;
+}
+
+.titulo-1 {
+    margin-left: 10px;
+    font-family: 'Dancing Script', cursive;
+}

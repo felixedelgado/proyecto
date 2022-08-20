@@ -23,7 +23,7 @@ from proyecto import views
 urlpatterns = [
     path('', include('home.urls')),
     path('admin/', admin.site.urls),
+    path('about/', views.about, name='about'),
     path('accounts/', include('accounts.urls')),
     path('blog/', include('blog.urls')),
-    # path('hora/<int:horas>', views.saludo, name='saludo'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
