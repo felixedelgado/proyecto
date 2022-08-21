@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extracss %}
+    <link rel="stylesheet" href="static/css/calendar.css">
+{% endblock %}
+
+{% block conten %}
+<h3>{{ mes }}</h3>
+<table class="table table-sm caption-top" id="calendario" style="width:70%" align="center">
+    <thead align="center">
+        <tr class="dias">
+            <td scope="col" style="width:14%">Domingo</td>
+            <td scope="col" style="width:14%">Lunes</td>
+            <td scope="col" style="width:14%">Martes</td>
+            <td scope="col" style="width:14%">Miercoles</td>
+            <td scope="col" style="width:14%">Jueves</td>
+            <td scope="col" style="width:14%">Viernes</td>
+            <td scope="col" style="width:14%">Sabado</td>
+        </tr>
+    </thead>
+    <tbody align="center">
+        {% for i in cal %}
+            <tr>
+                {% for d in i %}
+                    {% if d == 0 %}
+                        <td></td>
+                    {% else %}
+                        <td>{{ d }}
+                            <p><a href="{% url 'addevent' year month d %}"><i class="bi bi-plus-lg"></i></a></p>
+                        </td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

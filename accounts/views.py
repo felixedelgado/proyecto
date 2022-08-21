@@ -14,7 +14,7 @@ def login_view(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(
-                username = form.cleaned_data.get('username'),
+                correo = form.cleaned_data.get('correo'),
                 password = form.cleaned_data.get('password')
             )
             if user is not None:

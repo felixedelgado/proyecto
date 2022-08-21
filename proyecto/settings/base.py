@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'blog',
     'crispy_forms',
     'crispy_bootstrap5',
+    'calendario',
+    'static',
 ]
 
 MIDDLEWARE = [

@@ -1,8 +1,9 @@
-{% extends 'accounts/base.html' %}
+{% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block conten %}
 
-    <div class="card border-success mb-5 my-5" style="max-width: 80rem; margin: 0 auto;">
+    <div class="card border-success mb-5 my-5" style="max-width: 60rem; margin: 0 auto;">
         <div class="card-header bg-transparent border-success text-center">Bienvenido a nuestro login page</div>
         <div class="card-body text-success">
             <h5 class="card-title text-center">Ingresar</h5>
@@ -25,7 +26,7 @@
                     {% csrf_token %}
                     {{ form|crispy}}
                     <div class="text-center">
-                        <button type="submit">Iniciar sesión</button>
+                        <button class="btn btn-outline-success" type="submit">Iniciar sesión</button>
                     </div>
                 </form>
             {% endif %}

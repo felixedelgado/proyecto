@@ -1,0 +1,49 @@
+.body {
+    /* background:radial-gradient(center center, ellipse, white 25%, peru 66%, black 96%); */
+    /* background-color: black; */
+    /* background:linear-gradient(1deg, #0000ff, #ff00ff); */
+    background:linear-gradient(90deg, #6f5bc57e, #4b4bd318);
+}
+
+.style-transpa {
+    background-color: transparent !important;
+}
+
+.miclass-footer {
+    text-align: justify;
+}
+
+.inicio-style {
+    background-image: url(logo.png);
+    background-repeat: no-repeat;
+	/* background-size: 300px; */
+    width: 501px;
+    height: 501px;
+}
+
+.logo-11 {
+    background-image: url(logo.png);
+    background-repeat: no-repeat;
+    background-size: 55px 55px;
+    width: 55px;
+    height: 55px;
+    border-top-left-radius: 50% 50%;
+    border-top-right-radius: 50% 50%;
+    border-bottom-right-radius: 50% 50%;
+    border-bottom-left-radius: 50% 50%;
+}
+
+.link-11 {
+    border-top-left-radius: 50% 50%;
+    border-top-right-radius: 50% 50%;
+    border-bottom-right-radius: 50% 50%;
+    border-bottom-left-radius: 50% 50%;
+}
+
+.titulo-1 {
+    margin-left: 10px;
+    font-family: 'Dancing Script', cursive;
+}
+#calendario {
+    width: 50% !important;
+}
