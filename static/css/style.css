@@ -44,3 +44,6 @@
     margin-left: 10px;
     font-family: 'Dancing Script', cursive;
 }
+#calendario {
+    width: 50% !important;
+}

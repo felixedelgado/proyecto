@@ -7,15 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Inicio | Hechos con Alma{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     {% block stylesheets %}
-        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-        <!-- Google Font -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     {% endblock %}
     {% block extracss %}
 
@@ -54,14 +54,18 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">Acerca de nosotros
+                            <a class="nav-link" href="{% url 'about' %}">Acerca
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'calendario' %}">Calendario
                             </a>
                         </li>
                         <li class="nav-item">
                             {% if user.is_authenticated %}
                                 <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
                             {% else %}
-                                <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                                <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i> Iniciar sesión</a>
                             {% endif %}
                         </li>
                     </ul>

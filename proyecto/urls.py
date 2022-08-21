@@ -26,4 +26,5 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('accounts/', include('accounts.urls')),
     path('blog/', include('blog.urls')),
+    path('calendar/', include('calendario.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
