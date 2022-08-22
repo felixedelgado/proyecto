@@ -2,16 +2,18 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
-{{ form.title|add_class:"css_class_1 css_class_2" }}
-
+{#{{ form.title|add_class:"css_class_1 css_class_2" }}#}
 
 {% block conten %}
-
 <form action="" method="post">
     {% csrf_token %}
     <div class="form-floating mb-3">
             {{ form.name|add_class:"form-control"|attr:"id:floatingInput"|attr:"type:text" }}
             <label for="floatingInput">Nombre del Evento</label>
+    </div>
+    <div class="form-floating mb-3">
+        {{ form.date|add_class:"form-control"|attr:"id:floatingInput"|attr:"type:date" }}
+        <label for="floatingInput">Hora del Evento</label>
     </div>
     <div class="form-floating mb-3">
         {{ form.hora|add_class:"form-control"|attr:"id:floatingInput"|attr:"type:time" }}
@@ -25,7 +27,7 @@
         {{ form.descripcion|add_class:"form-control"|attr:"id:floatingInput"|attr:"type:text" }}
         <label for="floatingInput">Descripcion</label>
     </div>
-    <button type="submit" class="btn btn-success">Agregar</button>
+    <button type="submit" class="btn btn-success">Guardar</button>
 </form>
 
 {% endblock %}

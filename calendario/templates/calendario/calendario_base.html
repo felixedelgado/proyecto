@@ -3,6 +3,7 @@
 {% load widget_tweaks %}
 
 
+
 {% block conten %}
 <ul class="nav justify-content-center nav-tabs">
     <li class="nav-item">
@@ -26,7 +27,6 @@
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">2023</a>
     </li>
 </ul>
-
 <table class="table table-sm caption-top" id="calendario" style="width:85%" align="center">
     <thead align="center">
         <tr class="dias">
@@ -46,15 +46,15 @@
                     {% if d == 0 %}
                         <td></td>
                     {% else %}
-                        <td class="{% for event in event %}{% if d == event.date.day and month == event.date.month %} table-danger {% endif %}{% endfor %}">
-                            {{ d }}
-                            <p><a href="{% url 'addevent' year month d %}"><i class="bi bi-plus-lg"></i></a></p>
-                            {% for event in event %}
-                            {% if d == event.date.day and month == event.date.month %}
-                            <span class="badge text-bg-primary">{{ event.name }}</span>
-                            {% endif %}
-                            {% endfor %}
-                        </td>                       
+                    <td class="{% for event in event %}{% if d == event.date.day and month == event.date.month %} table-danger {% endif %}{% endfor %}">
+                        {{ d }}
+                        <p><a href="{% url 'addevent' year month d %}"><i class="bi bi-plus-lg"></i></a></p>
+                        {% for event in event %}
+                        {% if d == event.date.day and month == event.date.month %}
+                        <br><span class="badge text-bg-primary">{{ event.name }}</span>
+                        {% endif %}
+                        {% endfor %}
+                    </td>  
                     {% endif %}
                 {% endfor %}
             </tr>

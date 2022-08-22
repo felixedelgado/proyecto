@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'calendario',
     'static',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

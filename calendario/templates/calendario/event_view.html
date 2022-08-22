@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block conten %}
+<div class="table-responsive">
+<table class="table table-bordered" style="width:85%" align="center">
+    <thead>
+        <tr>
+            <th scope="col" style="width:15%">Nombre</th>
+            <th scope="col" style="width:15%">Fecha</th>
+            <th scope="col" style="width:15%">Hora</th>
+            <th scope="col" style="width:15%">Lugar</th>
+            <th scope="col" style="width:15%">Descripcion</th>
+            <th scope="col" style="width:15%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in event %}
+            <tr>
+                <td>{{ event.name }}</td>
+                <td>{{ event.date }}</td>
+                <td>{{ event.hora }}</td>
+                <td>{{ event.lugar }}</td>
+                <td>{{ event.descripcion }}</td>
+                <td>
+                    <a href="{% url 'event_update' event.id %}"><button type="button" class="btn btn-success">Editar</button></a>
+                    <a href="{% url 'event_delete' event.id %}"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
