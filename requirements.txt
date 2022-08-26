@@ -1,11 +1,13 @@
 asgiref==3.5.2
 crispy-bootstrap5==0.6
+dj-database-url==1.0.0
 Django==4.1
 django-crispy-forms==1.14.0
 django-multiforloop==0.3.1
 django-widget-tweaks==1.4.12
 gunicorn==20.1.0
 Pillow==9.2.0
+psycopg2-binary==2.9.3
 sqlparse==0.4.2
 tk==0.1.0
 tzdata==2022.2
