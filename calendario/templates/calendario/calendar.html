@@ -27,7 +27,7 @@
     </li>
 </ul>
 
-<table class="table table-sm caption-top" id="calendario" style="width:85%" align="center">
+<table class="table table-sm caption-top" id="calendario" style="width:95%" align="center">
     <thead align="center">
         <tr class="dias">
             <td scope="col" style="width:14%">Lunes</td>
@@ -46,12 +46,12 @@
                     {% if d == 0 %}
                         <td></td>
                     {% else %}
-                        <td class="{% for event in event %}{% if d == event.date.day and month == event.date.month %} table-danger {% endif %}{% endfor %}">
+                        <td class="{% for event in event %}{% if d == event.date.day and month == event.date.month %} table-danger {% endif %}{% endfor %} {% if d == day and month == month1 %} border border-dark {% endif %}">
                             {{ d }}
-                            <p><a href="{% url 'addevent' year month d %}"><i class="bi bi-plus-lg"></i></a></p>
+                            <br><a href="{% url 'addevent' year month d %}"><i class="bi bi-plus-lg"></i></a>
                             {% for event in event %}
                             {% if d == event.date.day and month == event.date.month %}
-                            <span class="badge text-bg-primary">{{ event.name }}</span>
+                            <br><span class="badge text-bg-primary">{{ event.name }}</span>
                             {% endif %}
                             {% endfor %}
                         </td>                       

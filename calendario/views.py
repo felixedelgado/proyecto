@@ -64,7 +64,7 @@ def calendario(request, m):
         cal= calendar.Calendar()
         cal = cal.monthdayscalendar(nowy, mesnum)
         mes = m
-    return render(request, 'calendario/calendar.html', {'event':event,'cal': cal, 'mes': mes, 'month': mesnum,'day': nowd, 'year': nowy, 'meses': meses})
+    return render(request, 'calendario/calendar.html', {'event':event,'cal': cal, 'mes': mes, 'month': mesnum,'day': nowd, 'year': nowy, 'meses': meses, 'month1': nowm})
 
 def calendario_base(request):
     event = Event.objects.all()
