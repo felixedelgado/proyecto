@@ -10,7 +10,6 @@ from blog.models import Category
 
 # Create your views here.
 def login_view(request):
-    cat = Category.objects.all()
     form = LoginForm()
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -26,7 +25,7 @@ def login_view(request):
                 messages.info(request, 'Credenciales inválidas')
         else:
             messages.error(request, 'Hay errores en el formulario')
-    return render(request, 'accounts/login.html', {'form': form, 'cat': cat})
+    return render(request, 'accounts/login.html', {'form': form})
 
 def logout_view(request):
     logout(request)

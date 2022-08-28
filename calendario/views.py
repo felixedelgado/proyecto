@@ -140,3 +140,15 @@ def event_update(request, pk):
             form.save()
             return redirect('event_view')
     return render(request, 'calendario/event_update.html', {'form': form, 'event': event, 'data': data})
+
+def event_create_date(request):
+    form = EventForm()
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Evento guardado con exito')
+            return redirect('event_view')
+        messages.error(request, 'Hay errores en el formulario')
+    form = EventForm()
+    return render(request, 'calendario/eventos_nuevo.html', { 'form': form })

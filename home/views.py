@@ -28,7 +28,7 @@ from django.contrib import messages
 #     return render(request, 'home/templates/base.html', {'cat': cat, 'form': form})
 
 def index(request):
-    cat = Category.objects.all()
+    # cat = Category.objects.all()
     # form = CatForm()
     # if request.method == 'POST':
     #     form = CatForm(request.POST)
@@ -37,4 +37,5 @@ def index(request):
     #         # messages.success(request, 'Nueva categoria agregada')
     #         return redirect('index')
     # form = CatForm()
-    return render(request, 'home/index.html', {'cat': cat})
+    # return render(request, 'home/index.html', {'cat_global': cate_global })
+    return render(request, 'home/index.html')

@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('event_view/', views.event_view, name='event_view'),
+    path('addevent/', views.event_create_date, name='addevent_new'),
     path('event_delete/<int:pk>/', views.event_delete, name='event_delete'),
     path('event_update/<int:pk>/', views.event_update, name='event_update'),
     path('<m>/', views.calendario, name='calendario'),

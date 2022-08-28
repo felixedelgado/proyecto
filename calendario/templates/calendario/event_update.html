@@ -5,6 +5,7 @@
 {#{{ form.title|add_class:"css_class_1 css_class_2" }}#}
 
 {% block conten %}
+<div class="container">
 <form action="" method="post">
     {% csrf_token %}
     <div class="form-floating mb-3">
@@ -29,5 +30,5 @@
     </div>
     <button type="submit" class="btn btn-success">Guardar</button>
 </form>
-
+</div>
 {% endblock %}

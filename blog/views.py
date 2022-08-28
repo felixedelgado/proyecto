@@ -26,10 +26,13 @@ def post_create(request):
 
 def post_update(request, pk):
     post = get_object_or_404(Post, id=pk)
-    form = PostForm(request.POST, instance=post)
-    if form.is_valid():
-        form.save()
-        return redirect('post_list')
+    data = post
+    form = PostForm(initial={'title':data.title, 'content':data.content, 'active':data.active, 'category':data.category})
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_list')
     return render(request, 'blog/blog_update.html', {'form': form, 'post': post})
 
 def post_delete(request, pk):
@@ -37,8 +40,9 @@ def post_delete(request, pk):
     post.delete()
     return redirect('post_list')
 
-def post_view(request, pk):
-    post = Post.objects.all(id=pk)
+def post_view(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    # post = Post.objects.all(id=pk)
     return render(request, 'blog/blog_view.html', {'post': post})
 
 def category_view(request):
@@ -57,13 +61,20 @@ def category_update(request, pk):
     cat = Category.objects.all()
     cat_edit = get_object_or_404(Category, id=pk)
     data = cat_edit
-    form = CatForm(request.POST, instance=cat_edit)
-    if form.is_valid():
-        form.save()
-        return redirect('category_view')
+    form = CatForm(initial={'name':data.name})
+    if request.method == 'POST':
+        form = CatForm(request.POST, instance=cat_edit)
+        if form.is_valid():
+            form.save()
+            return redirect('category_view')
     return render(request, 'blog/allcategory_edit.html', {'form': form, 'cat': cat, 'cat_edit': cat_edit, 'data': data})
 
-# def post_delete(request, pk):
-#     post = get_object_or_404(Post, id=pk)
-#     post.delete()
-#     return redirect('post_list')
+def cat_delete(request, pk):
+    cat = get_object_or_404(Category, id=pk)
+    cat.delete()
+    return redirect('category_view')
+
+def categoris(request, pk):
+    post = Post.objects.filter(category__id=pk)
+    # post = Post.objects.all(category.id=pk)
+    return render(request, 'blog/blog_cate.html', {'post':post})
