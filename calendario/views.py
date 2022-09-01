@@ -7,6 +7,7 @@ from datetime import date
 from .form import EventForm, EventForm1
 from email import message
 import calendar
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 # def calendario(request):
@@ -94,7 +95,10 @@ def calendario_base(request):
     cal = cal.monthdayscalendar(nowy, nowm)
     return render(request, 'calendario/calendario_base.html', {'event':event, 'cal': cal, 'mes': mes, 'month': nowm,'day': nowd, 'year': nowy, 'meses': meses})
 
+@login_required
 def event_create(request, year, month, d):
+    if not request.user.is_admin:
+        return redirect('index')
     fecha = datetime.date(year, month, d)
     fecha = fecha.strftime("%Y-%m-%d")
     form = EventForm1()
@@ -111,16 +115,11 @@ def event_create(request, year, month, d):
     form = EventForm1()
     return render(request, 'calendario/eventos.html', {'form': form, 'fecha': fecha })
 
-# def calendario(request):
-#     now = datetime.datetime.now()
-#     nowd = now.day
-#     nowm = now.month
-#     nowy = now.year
-#     tc= calendar.TextCalendar(firstweekday=0)
-#     cal = tc.formatmonth(nowy, nowm)
-#     return render(request, 'calendario/calendar.html', {'cal': cal})
 
+@login_required
 def event_delete(request, pk):
+    if not request.user.is_admin:
+        return redirect('index')
     event = get_object_or_404(Event, id=pk)
     event.delete()
     return redirect('event_view')
@@ -129,7 +128,10 @@ def event_view(request):
     event = Event.objects.all()
     return render(request, 'calendario/event_view.html', {'event': event})
 
+@login_required
 def event_update(request, pk):
+    if not request.user.is_admin:
+        return redirect('index')
     event = get_object_or_404(Event, id=pk)
     data = event
     data.date = data.date.strftime("%Y-%m-%d")
@@ -141,7 +143,10 @@ def event_update(request, pk):
             return redirect('event_view')
     return render(request, 'calendario/event_update.html', {'form': form, 'event': event, 'data': data})
 
+@login_required
 def event_create_date(request):
+    if not request.user.is_admin:
+        return redirect('index')
     form = EventForm()
     if request.method == 'POST':
         form = EventForm(request.POST)

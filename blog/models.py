@@ -15,6 +15,7 @@ class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
+    num_views = models.IntegerField('Numero de visitas', default=0)
     def __str__(self):
         return self.title
     def save(self, *args, **kwargs):

@@ -22,8 +22,8 @@
     </div>
 
     {% for comment in post.comments.all %}
-    {{ comment.user.nombre }}
-    {{ comment.user.apellido }}
+    {{ comment.user.first_name }}
+    {{ comment.user.last_name }}
     {{ comment.content }}
     {{ comment.created_at }}
 

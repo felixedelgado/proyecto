@@ -48,7 +48,9 @@
                     {% else %}
                         <td class="{% for event in event %}{% if d == event.date.day and month == event.date.month %} table-danger {% endif %}{% endfor %} {% if d == day and month == month1 %} border border-dark {% endif %}">
                             {{ d }}
+                            {% if request.user.is_admin %}
                             <br><a href="{% url 'addevent' year month d %}"><i class="bi bi-plus-lg"></i></a>
+                            {% endif %}
                             {% for event in event %}
                             {% if d == event.date.day and month == event.date.month %}
                             <br><span class="badge text-bg-primary">{{ event.name }}</span>

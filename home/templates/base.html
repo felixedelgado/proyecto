@@ -47,9 +47,10 @@
                                 <li><a class="dropdown-item" href="{% url 'blog_cate' cate.id %}">{{ cate.name }}</a></li>
                                 {% endfor %}
                                 <!-- <li><a class="dropdown-item" href="#">Categoría 1</a></li> -->
-                                {% if request.user.is_authenticated and request.user.is_admin %}
+                                {% if request.user.is_admin %}
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{% url 'category_view' %}">Agregar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'blog_inactivos' %}">Blog inactivos</a></li>
                                 {% endif %}
                             </ul>
                         </li>
@@ -74,7 +75,7 @@
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Ingresar búsqueda" aria-label="Search">
+                        <input class="form-control me-2" type="search" placeholder="Ingresar búsqueda" name="busqueda" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
                 </div>

@@ -5,6 +5,11 @@
 
 {% block conten %}
 <div class='container'>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+        <a href="{% url 'post_list' %}">
+        <button class="btn btn-primary" type="button">Volver</button>
+        </a>
+    </div>
     {% if request.user.is_authenticated and request.user.is_admin %}
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
         <a href="{% url 'post_delete' post.id %}">
@@ -13,6 +18,7 @@
         <a href="{% url 'post_update' post.id %}">
             <button class="btn btn-primary" type="button">Editar</button>
         </a>
+        <p> {{ post.num_views }} </p>
     </div>
     {% endif %}
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
@@ -22,34 +28,29 @@
     </div>
 
     {% for comment in post.comments.all %}
-        {{ comment.user.nombre }}
-        {{ comment.user.apellido }}
-        {{ comment.content }}
-        {{ comment.created_at }}
-
-    {% if request.user.is_authenticated %}
-        {% if request.user == comment.user %}
-            <p>Soy el dueño {{request.user }}</p>
-            <a href="{% url 'comment_update' comment.id %}">
-                <button class="btn btn-primary" type="button">Editar comentario</button>
-            </a>
-            <a href="{% url 'comment_delete' comment.id %}">
-                <button class="btn btn-danger" type="button">Borrar comentario</button>
-            </a>
-        {% endif %}
-    {% endif %}
-
-    {% endfor %}
-        
-        <a href="{% url 'comment_create' post.slug %}">
-            <button class="btn btn-primary" type="button">Agregar comentario</button>
-        </a>
-        
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-        {% comment %} <button class="btn btn-primary me-md-2" type="button">Button</button> {% endcomment %}
-        <a href="{% url 'post_list' %}">
-        <button class="btn btn-primary" type="button">Volver</button>
-        </a>
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+            <h5 class="card-title">{{ comment.user.first_name }} {{ comment.user.last_name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ comment.created_at }}</h6>
+            <p class="card-text">{{ comment.content }}</p>
+            {% if request.user.is_authenticated %}
+                {% if request.user == comment.user or request.user.is_admin %}
+                    <a href="{% url 'comment_update' comment.id %}" class="card-link">Editar comentario</a>
+                    <a href="{% url 'comment_delete' comment.id %}" class="card-link">Eliminar comentario</a>
+                {% endif %}
+            {% endif %}
+        </div>
     </div>
+    {% endfor %}
+
+    <form action="{% url 'comment_create' post.slug %}" method="post">
+        {% csrf_token %}
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Comentario</span>
+            <input type="text" name="content" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <button type="submit" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Comentar</button>
+    </form>
+        
 </div>
 {% endblock %}

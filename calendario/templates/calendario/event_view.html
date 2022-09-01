@@ -12,7 +12,9 @@
             <th scope="col" class="col-1">Hora</th>
             <th scope="col" class="col-2">Lugar</th>
             <th scope="col" class="col-2">Descripcion</th>
+            {% if request.user.is_admin %}
             <th scope="col" class="col-3"><a href='{% url 'addevent_new' %}'><button type="button" class="btn btn-primary">Agregar</button></a></th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -23,10 +25,12 @@
                 <td>{{ event.hora }}</td>
                 <td>{{ event.lugar }}</td>
                 <td>{{ event.descripcion }}</td>
+                {% if request.user.is_admin %}
                 <td>
                     <a href="{% url 'event_update' event.id %}"><button type="button" class="btn btn-success">Editar</button></a>
                     <a href="{% url 'event_delete' event.id %}"><button type="button" class="btn btn-danger">Eliminar</button></a>
                 </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </tbody>

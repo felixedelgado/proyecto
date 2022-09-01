@@ -5,7 +5,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = '__all__'
-        exclude = ['user', 'slug']
+        exclude = ['user', 'slug', 'num_views']
     
 
 class CatForm(forms.ModelForm):

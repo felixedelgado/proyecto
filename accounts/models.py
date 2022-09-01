@@ -8,29 +8,29 @@ from django.utils.translation import gettext as _
 #     '''Extiende el Usuario'''
 
 class ManejadorUsuario(BaseUserManager):
-    def create_user(self, correo, password=None):
-        if not correo:
+    def create_user(self, email, password=None):
+        if not email:
             raise ValueError('Usuarios deben tener un correo electronico valido.')
         usuario = self.model(
-            correo=self.normalize_email(correo),
+            email=self.normalize_email(email),
         )
 
         usuario.set_password(password)
         usuario.save(using=self._db)
         return usuario
 
-    def create_staffuser(self, correo, password):
+    def create_staffuser(self, email, password):
         usuario = self.create_user(
-            correo,
+            email,
             password=password,
         )
         usuario.staff = True
         usuario.save(using=self._db)
         return usuario
 
-    def create_superuser(self, correo, password):
+    def create_superuser(self, email, password):
         usuario = self.create_user(
-            correo,
+            email,
             password=password,
         )
         usuario.staff = True
@@ -39,9 +39,9 @@ class ManejadorUsuario(BaseUserManager):
         return usuario
 
 class User(AbstractUser):
-    correo = models.EmailField(verbose_name='correo electrónico', max_length=100, unique=True)
-    nombre =models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
+    email = models.EmailField(verbose_name='correo electrónico', max_length=100, unique=True)
+    first_name =models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
 
     active = models.BooleanField(_('Activo'), default=True)
     staff = models.BooleanField(default=False)
@@ -49,7 +49,7 @@ class User(AbstractUser):
 
     objects = ManejadorUsuario()
 
-    USERNAME_FIELD = 'correo'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     class Meta:
@@ -57,10 +57,10 @@ class User(AbstractUser):
         verbose_name_plural = ('usuarios')
     
     def get_full_name(self):
-        return self.nombre + ' ' + self.apellido
+        return self.first_name + ' ' + self.last_name
 
     def get_short_name(self):
-        return self.nombre
+        return self.first_name
 
     def has_perm(self, perm, obj=None):
         return True
@@ -81,20 +81,4 @@ class User(AbstractUser):
         return self.active
 
     def __str__(self):
-        return self.nombre + ' ' + self.apellido + ' ' + self.correo
-
-
-
-
-    # name = models.CharField(max_length=25, null=False)
-    # lastname = models.CharField(max_length=25, null=False)
-    # password = models.
-    # created_at = models.DateTimeField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True)
-    # active = models.TextField(default=True)
-    # slug = models.SlugField(max_length=255, unique=True)
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user')
-    # image = models.ImageField(upload_to='images/<str:user>', blank=True, null=True)
-    # def __str__(self):
-    #     return self.name
-
+        return self.first_name + ' ' + self.last_name + ' ' + self.email
