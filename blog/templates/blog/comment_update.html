@@ -22,29 +22,38 @@
     </div>
 
     {% for comment in post.comments.all %}
-        {{ comment.user.nombre }}
-        {{ comment.user.apellido }}
-        {{ comment.content }}
-        {{ comment.created_at }}
+    {{ comment.user.nombre }}
+    {{ comment.user.apellido }}
+    {{ comment.content }}
+    {{ comment.created_at }}
 
     {% if request.user.is_authenticated %}
         {% if request.user == comment.user %}
-            <p>Soy el dueño {{request.user }}</p>
+            {% if comment.id == commen.id%}
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.content}}
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+
+            {% else %}
+            <p>Soy el dueño {{ request.user }}</p>
             <a href="{% url 'comment_update' comment.id %}">
                 <button class="btn btn-primary" type="button">Editar comentario</button>
             </a>
             <a href="{% url 'comment_delete' comment.id %}">
                 <button class="btn btn-danger" type="button">Borrar comentario</button>
             </a>
+            {% endif %}
         {% endif %}
     {% endif %}
-
     {% endfor %}
-        
-        <a href="{% url 'comment_create' post.slug %}">
-            <button class="btn btn-primary" type="button">Agregar comentario</button>
-        </a>
-        
+
+    {% comment %} <form action="" method="post">
+        {% csrf_token %}
+        {{form.content}}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form> {% endcomment %}
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
         {% comment %} <button class="btn btn-primary me-md-2" type="button">Button</button> {% endcomment %}
         <a href="{% url 'post_list' %}">

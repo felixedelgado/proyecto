@@ -1,9 +1,10 @@
 from email import message
 from gc import get_objects
+from multiprocessing import context
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Post, Category
-from .form import CatForm, PostForm
+from .models import Post, Category, Comment
+from .form import CatForm, PostForm, CommentForm
 # Create your views here.
 
 def post_list(request):
@@ -78,3 +79,50 @@ def categoris(request, pk):
     post = Post.objects.filter(category__id=pk)
     # post = Post.objects.all(category.id=pk)
     return render(request, 'blog/blog_cate.html', {'post':post})
+
+def comment_create(request, slug):
+    context = {}
+    post = get_object_or_404(Post, slug=slug)
+    context['post'] = post
+    form = CommentForm()
+    context['form'] = form
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+            return redirect('post_view', slug=post.slug)
+    return render(request, 'blog/comment_create.html', context)
+
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, id=pk)
+    comment.delete()
+    return redirect('post_view', slug=comment.post.slug)
+
+def comment_update(request, pk):
+    context = {}
+    comment = get_object_or_404(Comment, id=pk)
+    data = comment
+    context['commen'] = comment
+    form = CommentForm(initial={'content':data.content})
+    context['form'] = form
+    context['post'] = comment.post
+    post = comment.post
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('post_view', slug=post.slug)
+    return render(request, 'blog/comment_update.html', context)
+    
+    # comment = get_object_or_404(Comment, id=pk)
+    # data = comment
+    # form = CommentForm(initial={'content':data.content})
+    # if request.method == 'POST':
+    #     form = CommentForm(request.POST, instance=comment)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('post_view', slug=comment.post.slug)
+    # return render(request, 'blog/comment_update.html', {'form': form})

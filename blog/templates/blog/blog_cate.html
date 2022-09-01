@@ -23,5 +23,11 @@
         </div>
     </div>
 {% endfor %}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+        {% comment %} <button class="btn btn-primary me-md-2" type="button">Button</button> {% endcomment %}
+        <a href="{% url 'index' %}">
+        <button class="btn btn-primary" type="button">Volver</button>
+        </a>
+    </div>
 </div>
 {% endblock %}
