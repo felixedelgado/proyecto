@@ -1,22 +1,57 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}{{ post.title }} | Hechos con Alma{% endblock %}
 
 {% block conten %}
-    <div class="clearfix">
-        {{ form|crispy }}
-        <!-- <img src="..." class="col-md-6 float-md-end mb-3 ms-md-3" alt="...">
-    
-        <p>
-        A paragraph of placeholder text. We're using it here to show the use of the clearfix class. We're adding quite a few meaningless phrases here to demonstrate how the columns interact here with the floated image.
-        </p>
-    
-        <p>
-        As you can see the paragraphs gracefully wrap around the floated image. Now imagine how this would look with some actual content in here, rather than just this boring placeholder text that goes on and on, but actually conveys no tangible information at. It simply takes up space and should not really be read.
-        </p>
-    
-        <p>
-        And yet, here you are, still persevering in reading this placeholder text, hoping for some more insights, or some hidden easter egg of content. A joke, perhaps. Unfortunately, there's none of that here.
-        </p> -->
+<div class='container'>
+    {% if request.user.is_authenticated and request.user.is_admin %}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+        <a href="{% url 'post_delete' post.id %}">
+            <button class="btn btn-primary me-md-2" type="button">Eliminar</button>
+        </a>
+        <a href="{% url 'post_update' post.id %}">
+            <button class="btn btn-primary" type="button">Editar</button>
+        </a>
+        <p> {{ post.num_views }} </p>
     </div>
-{% endblock%}
+    {% endif %}
+    <div class="shadow-lg p-3 mb-5 bg-body rounded">
+        <p class="fs-2">{{ post.title }}</p>
+        <p class="fw-light">{{ post.content|safe }}</p>
+        <div class="col-12">
+        {% if post.image %}
+        <img src="{{ post.image.url }}" style="width: 100%;" alt="">
+        {% endif%}
+        </div>
+    </div>
+
+    {% for comment in post.comments.all %}
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+            <h5 class="card-title">{{ comment.user.first_name }} {{ comment.user.last_name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ comment.created_at }}</h6>
+            <p class="card-text">{{ comment.content }}</p>
+            {% if request.user.is_authenticated %}
+                {% if request.user == comment.user or request.user.is_admin %}
+                    <a href="{% url 'comment_update' comment.id %}" class="card-link">Editar comentario</a>
+                    <a href="{% url 'comment_delete' comment.id %}" class="card-link">Eliminar comentario</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <form action="{% url 'comment_create' post.slug %}" method="post">
+        {% csrf_token %}
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Comentario</span>
+            <input type="text" name="content" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <button type="submit" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Comentar</button>
+    </form>
+        
+</div>
+{% endblock %}

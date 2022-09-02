@@ -5,7 +5,18 @@
 {% block title %}Todos los blogs | Hechos con Alma{% endblock %}
 
 {% block conten %}
+
+
 <div class="container">
+    <form id="form_fecha" action="/blog/date/" method="post">
+    <div class="form-floating mb-3">
+        {% csrf_token %}
+        <input class="form-control" id="floatingInput" type="date" name="fecha" id="fecha" {% if fecha %} value="{{ fecha }}" {% endif %}>
+        <label for="floatingInput">Fecha</label>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Buscar">
+    </form>
+
     {% if request.user.is_authenticated and request.user.is_admin %}
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
             {% comment %} <button class="btn btn-primary me-md-2" type="button">Button</button> {% endcomment %}

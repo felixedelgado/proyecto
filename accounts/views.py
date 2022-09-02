@@ -6,6 +6,7 @@ from .form import LoginForm
 from django.contrib import messages
 # from django.contrib.auth.forms import UserCreationForm
 from .form import SignUpForm
+from blog.models import Category
 
 # Create your views here.
 def login_view(request):
@@ -14,7 +15,7 @@ def login_view(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(
-                correo = form.cleaned_data.get('correo'),
+                email = form.cleaned_data.get('email'),
                 password = form.cleaned_data.get('password')
             )
             if user is not None:

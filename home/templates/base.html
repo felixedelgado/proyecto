@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Inicio | Hechos con Alma{% endblock %}</title>
+    <link rel="shortcut icon" href="/static/img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -27,7 +28,7 @@
         <nav class="navbar navbar-expand-lg bg-light style-transpa">
             <div class="container-fluid">
                 <a href="{% url 'index' %}" class="link-11">
-                <div class="logo-11""></div>
+                <div class="logo-11"></div>
                 </a>
                 <a class="navbar-brand text-success titulo-1" href="{% url 'index' %}">HECHOS CON ALMA</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,34 +44,67 @@
                                 Categorías
                             </a>
                             <ul class="dropdown-menu">
-                                {% for cat in cat %}
-                                <li><a class="dropdown-item" href="#">{{ cat.name }}</a></li>
+                                {% for cate in miscategorias %}
+                                <li><a class="dropdown-item" href="{% url 'blog_cate' cate.id %}">{{ cate.name }}</a></li>
                                 {% endfor %}
                                 <!-- <li><a class="dropdown-item" href="#">Categoría 1</a></li> -->
-                                {% if request.user.is_authenticated and request.user.is_admin %}
+                                {% if request.user.is_admin %}
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{% url 'category_view' %}">Agregar</a></li>
+                                <li><a class="dropdown-item" href="{% url 'blog_inactivos' %}">Blog inactivos</a></li>
                                 {% endif %}
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filtrar
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'post_date' %}">Fecha de publicación</a></li>
+                                {% if request.user.is_admin %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'post_date_edit' %}">Fecha de edición</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'calendario_base' %}">Calendario
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'event_view' %}">Lista de eventos
+                            </a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mi cuenta
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <!-- <li><a class="dropdown-item" href="#">Categoría 1</a></li> -->
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                                {% if user.is_admin %}
+                                <li><a class="dropdown-item" href="#">Admin de Cuentas</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i> Iniciar sesión</a>
+                            
+                        </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'about' %}">Acerca
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'calendario' %}">Calendario
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            {% if user.is_authenticated %}
-                                <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
-                            {% else %}
-                                <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i> Iniciar sesión</a>
-                            {% endif %}
-                        </li>
                     </ul>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Ingresar búsqueda" aria-label="Search">
+                        <input class="form-control me-2" type="search" placeholder="Ingresar búsqueda" name="busqueda" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
                 </div>
@@ -79,6 +113,9 @@
     {% endblock %}
 
     {% block conten %}
+    <div class="container logo-01">
+        <img src="/static/img/logo.png" alt="" style="width:100%;">
+    </div>
 
     {% endblock %}
 
@@ -189,6 +226,7 @@
                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                             <!-- Links -->
                             <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1784.586899392747!2d-59.34230322765779!3d-26.546683999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe938712e730b28e9!2zMjbCsDMyJzQ4LjEiUyA1OcKwMjAnMjkuMCJX!5e0!3m2!1ses!2sar!4v1661653912662!5m2!1ses!2sar" width="200" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             <p><i class="fas fa-home me-3 text-grayish bi bi-pin-map"></i> Calle Ayacucho Nº430.<br> Gral. José de San Martín, Chaco.</p>
                             <p>
                                 <i class="fas fa-envelope me-3 text-grayish bi bi-envelope"></i>

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
 
-{% block title %}Todos los blogs | Hechos con Alma{% endblock %}
+{% load widget_tweaks %}
+
+{% block title %}Categoiras | Hechos con Alma{% endblock %}
 
 {% block conten %}
 <div class="container">
@@ -15,15 +16,15 @@
         </div>
     {% endif %}
 {% for post in post %}
-        <div class="card mb-3">
-            <h5 class="card-header">{{post.category}}</h5>
-            <div class="card-body">
-                <h5 class="card-title">{{post.title}}</h5>
-                <p class="card-text">{{post.describe}}</p>
-                <p class="card-text">{{post.created_at}}</p>
-                <a href="{% url 'post_view' post.slug %}" class="btn btn-primary">Ver</a>
-            </div>
+    <div class="card mb-3">
+        <h5 class="card-header">{{post.category}}</h5>
+        <div class="card-body">
+            <h5 class="card-title">{{post.title}}</h5>
+            <p class="card-text">{{post.describe}}</p>
+            <p class="card-text">{{post.created_at}}</p>
+            <a href="{% url 'post_view' post.slug %}" class="btn btn-primary">Ver</a>
         </div>
+    </div>
 {% endfor %}
 
 </div>

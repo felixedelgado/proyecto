@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Eventos | Hechos con Alma{% endblock %}
+
+{% block conten %}
+<div class="container table-responsive">
+<table class="table table-bordered" style="width:85%" align="center">
+    <thead>
+        <tr class="align-middle text-center">
+            <th scope="col" class="col-2">Nombre</th>
+            <th scope="col" class="col-2">Fecha</th>
+            <th scope="col" class="col-1">Hora</th>
+            <th scope="col" class="col-2">Lugar</th>
+            <th scope="col" class="col-2">Descripcion</th>
+            {% if request.user.is_admin %}
+            <th scope="col" class="col-3"><a href='{% url 'addevent_new' %}'><button type="button" class="btn btn-primary">Agregar</button></a></th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in event %}
+            <tr class="align-middle">
+                <td>{{ event.name }}</td>
+                <td>{{ event.date }}</td>
+                <td>{{ event.hora }}</td>
+                <td>{{ event.lugar }}</td>
+                <td>{{ event.descripcion }}</td>
+                {% if request.user.is_admin %}
+                <td>
+                    <a href="{% url 'event_update' event.id %}"><button type="button" class="btn btn-success">Editar</button></a>
+                    <a href="{% url 'event_delete' event.id %}"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

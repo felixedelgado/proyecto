@@ -47,3 +47,12 @@
 #calendario {
     width: 50% !important;
 }
+
+img.logo-01 {
+    width: 100% !important;
+}
+
+div.logo-01 {
+    width: 100% !important;
+    align-content: center !important;
+}

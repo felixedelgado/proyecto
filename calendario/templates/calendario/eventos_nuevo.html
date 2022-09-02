@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Eventos | Hechos con Alma{% endblock %}
+
+{% block conten %}
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+                {{ form.name|add_class:"form-control"|attr:"id:floatingInput"|attr:"type:text" }}
+                <label for="floatingInput">Nombre del Evento</label>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.date|add_class:"form-control"|attr:"id:floatingInput"|attr:"type:date" }}
+            <label for="floatingInput">Hora del Evento</label>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.hora|add_class:"form-control"|attr:"id:floatingInput"|attr:"type:time" }}
+            <label for="floatingInput">Hora del Evento</label>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.lugar|add_class:"form-control"|attr:"id:floatingInput"|attr:"type:text" }}
+            <label for="floatingInput">Lugar</label>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.descripcion|add_class:"form-control"|attr:"id:floatingInput"|attr:"type:text" }}
+            <label for="floatingInput">Descripcion</label>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+</div>
+{% endblock %}

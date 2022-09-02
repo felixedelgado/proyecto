@@ -6,7 +6,8 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'proyecto.settings.base') # Aca cambio la ubicacion de mi archivo de configuracion
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'proyecto.settings.base')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'proyecto.settings.production') # Aca cambio la ubicacion de mi archivo de configuracion
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
