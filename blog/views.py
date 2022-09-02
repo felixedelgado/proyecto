@@ -17,8 +17,12 @@ def post_list(request):
 def post_date(request):
     if request.method == 'POST':
         fecha = request.POST.get('fecha')
-        post = Post.objects.filter(created_at=fecha).order_by('-created_at_time')
-        return render(request, 'blog/blog_date.html', {'post':post, 'fecha':fecha})
+        if fecha:
+            post = Post.objects.filter(created_at=fecha).order_by('-created_at_time')
+            return render(request, 'blog/blog_date.html', {'post':post, 'fecha':fecha})
+        else:
+            post = Post.objects.all().order_by('-created_at_time')
+            return render(request, 'blog/blog_date.html', {'post':post})
     else:
         post = Post.objects.all().order_by('-created_at_time')
         return render(request, 'blog/blog_date.html', {'post':post})
@@ -29,8 +33,12 @@ def post_date_edit(request):
         return redirect('index')
     if request.method == 'POST':
         fecha = request.POST.get('fecha')
-        post = Post.objects.filter(updated_at=fecha).order_by('-updated_at_time')
-        return render(request, 'blog/blog_date_edit.html', {'post':post, 'fecha':fecha})
+        if fecha:
+            post = Post.objects.filter(updated_at=fecha).order_by('-updated_at_time')
+            return render(request, 'blog/blog_date_edit.html', {'post':post, 'fecha':fecha})
+        else:
+            post = Post.objects.all().order_by('-updated_at_time')
+            return render(request, 'blog/blog_date_edit.html', {'post':post})
     else:
         post = Post.objects.all().order_by('-updated_at_time')
         return render(request, 'blog/blog_date_edit.html', {'post':post})
