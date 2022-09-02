@@ -21,9 +21,11 @@
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
         <p class="fs-2">{{ post.title }}</p>
         <p class="fw-light">{{ post.content|safe }}</p>
+        <div class="col-12">
         {% if post.image %}
         <img src="{{ post.image.url }}" style="width: 100%;" alt="">
         {% endif%}
+        </div>
     </div>
 
     {% for comment in post.comments.all %}
