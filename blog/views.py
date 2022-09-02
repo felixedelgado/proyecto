@@ -11,8 +11,29 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 # Create your views here.
 
 def post_list(request):
-    post = Post.objects.filter(active=True)
+    post = Post.objects.filter(active=True).order_by('-created_at', '-created_at_time')
     return render(request, 'blog/blog_list.html', {'post': post})
+
+def post_date(request):
+    if request.method == 'POST':
+        fecha = request.POST.get('fecha')
+        post = Post.objects.filter(created_at=fecha).order_by('-created_at_time')
+        return render(request, 'blog/blog_date.html', {'post':post, 'fecha':fecha})
+    else:
+        post = Post.objects.all().order_by('-created_at_time')
+        return render(request, 'blog/blog_date.html', {'post':post})
+    
+@login_required
+def post_date_edit(request):
+    if not request.user.is_admin:
+        return redirect('index')
+    if request.method == 'POST':
+        fecha = request.POST.get('fecha')
+        post = Post.objects.filter(updated_at=fecha).order_by('-updated_at_time')
+        return render(request, 'blog/blog_date_edit.html', {'post':post, 'fecha':fecha})
+    else:
+        post = Post.objects.all().order_by('-updated_at_time')
+        return render(request, 'blog/blog_date_edit.html', {'post':post})
 
 @login_required
 # @user_passes_test(has_admin)
@@ -38,9 +59,9 @@ def post_update(request, pk):
         return redirect('index')
     post = get_object_or_404(Post, id=pk)
     data = post
-    form = PostForm(initial={'title':data.title, 'content':data.content, 'active':data.active, 'category':data.category})
+    form = PostForm(initial={'title':data.title, 'describe':data.describe, 'content':data.content, 'active':data.active, 'category':data.category, 'image':data.image})
     if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return redirect('post_list')
@@ -56,7 +77,9 @@ def post_delete(request, pk):
 
 def post_view(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    if not request.user.is_admin:
+    if not request.user.is_authenticated:
+        post.num_views = post.num_views + 1
+    elif not request.user.is_admin:
         post.num_views = post.num_views + 1
     post.save()
     # post = Post.objects.all(id=pk)
@@ -74,7 +97,10 @@ def category_view(request):
     form = CatForm()
     return render(request, 'blog/allcategory.html', {'cat': cat, 'form': form})
 
+@login_required
 def post_inactive(request):
+    if not request.user.is_admin:
+        return redirect('index')
     post = Post.objects.filter(active=False)
     return render(request, 'blog/blog_inact.html', {'post':post})
 
@@ -102,7 +128,7 @@ def cat_delete(request, pk):
     return redirect('category_view')
 
 def categoris(request, pk):
-    post = Post.objects.filter(category__id=pk, active=True)
+    post = Post.objects.filter(category__id=pk, active=True).order_by('-created_at', '-created_at_time')
     # post = Post.objects.all(category.id=pk)
     return render(request, 'blog/blog_cate.html', {'post':post})
 

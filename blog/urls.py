@@ -15,4 +15,6 @@ urlpatterns = [
     path('view/<slug:slug>/comments/add/', views.comment_create, name='comment_create'),
     path('comments/<int:pk>/delete/', views.comment_delete, name='comment_delete'),
     path('comments/<int:pk>/update/', views.comment_update, name='comment_update'),
+    path('date/', views.post_date, name='post_date'),
+    path('date_edit/', views.post_date_edit, name='post_date_edit'),
 ]

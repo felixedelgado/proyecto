@@ -3,14 +3,10 @@
 
 {% load widget_tweaks %}
 
+{% block title %}Categoiras | Hechos con Alma{% endblock %}
+
 {% block conten %}
 <div class="container">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-        {% comment %} <button class="btn btn-primary me-md-2" type="button">Button</button> {% endcomment %}
-        <a href="{% url 'index' %}">
-        <button class="btn btn-primary" type="button">Volver</button>
-        </a>
-    </div>
     {% if request.user.is_authenticated and request.user.is_admin %}
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
             {% comment %} <button class="btn btn-primary me-md-2" type="button">Button</button> {% endcomment %}
@@ -24,7 +20,8 @@
         <h5 class="card-header">{{post.category}}</h5>
         <div class="card-body">
             <h5 class="card-title">{{post.title}}</h5>
-            <p class="card-text">{{post.content}}</p>
+            <p class="card-text">{{post.describe}}</p>
+            <p class="card-text">{{post.created_at}}</p>
             <a href="{% url 'post_view' post.slug %}" class="btn btn-primary">Ver</a>
         </div>
     </div>

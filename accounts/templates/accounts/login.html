@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+
+{% block title %}Iniciar sesión | Hechos con Alma{% endblock %}
+
 {% block conten %}
 
     <div class="card border-success mb-5 my-5" style="max-width: 60rem; margin: 0 auto;">
@@ -35,26 +38,4 @@
         <div class="card-footer bg-transparent border-success"><p class="text-center">No tiene una cuenta? <span><a href="{% url 'registrar_user' %}"> Regístrate</a></span></p></div>
     </div>
 
-    <!-- <h1>Bienvenido a nuestro login page</h1>
-    {% if messages %}
-        <ul class="messages">
-            {% for messages in messages %}
-            <li {% if messages.tags %} class="{{ messages.tags }}" {% endif %}>{{ messages }}</li>
-            {% endfor%}
-        </ul>
-    {% endif %}
-
-    {% if user.is_authenticated %}
-        <h2>Usted esta logeado como {{ user.username }}</h2>
-        <a href="{% url 'logout' %}">Cerrar sesión</a>
-        <a href="{% url 'index' %}">Volver a inicio</a>
-    {% else %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Iniciar sesión</button>
-    </form>
-    {% endif %}
-
-    <p>No tiene una cuenta? <span><a href="{% url 'registrar_user' %}"> Regístrate</a></span></p> -->
 {% endblock %}

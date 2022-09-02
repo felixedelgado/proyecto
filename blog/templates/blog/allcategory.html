@@ -3,25 +3,10 @@
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
 
+{% block title %}Categoiras | Hechos con Alma{% endblock %}
+
 {% block conten %}
 
-    <!-- <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-        </div>
-    </div> -->
 <div class="container">
     <div class="row row-cols-1 row-cols-md-2 g-4">
     {% for cat in cat %}
@@ -32,7 +17,7 @@
                     {% if request.user.is_authenticated %}
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                             <a href="{% url 'edit_category' cat.id %}"><button type="button" class="btn btn-danger">Editar Categoria</button></a>
-                            <a href="{% url 'cat_delete' cat.id %}"><button type="button" class="btn btn-success">Borrar Post</button></a>
+                            <a href="{% url 'cat_delete' cat.id %}"><button type="button" class="btn btn-success">Borrar Categoria</button></a>
                         </div>
                     {% endif %}
                 </div>

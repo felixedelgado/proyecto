@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Inicio | Hechos con Alma{% endblock %}</title>
+    <link rel="shortcut icon" href="/static/img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -54,10 +55,20 @@
                                 {% endif %}
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">Acerca
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filtrar
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'post_date' %}">Fecha de publicación</a></li>
+                                {% if request.user.is_admin %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'post_date_edit' %}">Fecha de edición</a></li>
+                                {% endif %}
+                            </ul>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'calendario_base' %}">Calendario
                             </a>
@@ -66,12 +77,30 @@
                             <a class="nav-link" href="{% url 'event_view' %}">Lista de eventos
                             </a>
                         </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mi cuenta
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <!-- <li><a class="dropdown-item" href="#">Categoría 1</a></li> -->
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                                {% if user.is_admin %}
+                                <li><a class="dropdown-item" href="#">Admin de Cuentas</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% else %}
                         <li class="nav-item">
-                            {% if user.is_authenticated %}
-                                <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
-                            {% else %}
                                 <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i> Iniciar sesión</a>
-                            {% endif %}
+                            
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">Acerca
+                            </a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
@@ -84,6 +113,9 @@
     {% endblock %}
 
     {% block conten %}
+    <div class="container logo-01">
+        <img src="/static/svg/verdebendito.svg" alt="">
+    </div>
 
     {% endblock %}
 

@@ -3,13 +3,10 @@
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
 
+{% block title %}{{ post.title }} | Hechos con Alma{% endblock %}
+
 {% block conten %}
 <div class='container'>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-        <a href="{% url 'post_list' %}">
-        <button class="btn btn-primary" type="button">Volver</button>
-        </a>
-    </div>
     {% if request.user.is_authenticated and request.user.is_admin %}
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
         <a href="{% url 'post_delete' post.id %}">
@@ -23,8 +20,10 @@
     {% endif %}
     <div class="shadow-lg p-3 mb-5 bg-body rounded">
         <p class="fs-2">{{ post.title }}</p>
-        <p class="fw-light">{{ post.content }}</p>
-        <img src="{{ post.image }}" alt="">
+        <p class="fw-light">{{ post.content|safe }}</p>
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="">
+        {% endif%}
     </div>
 
     {% for comment in post.comments.all %}

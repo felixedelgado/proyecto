@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'calendario',
     'static',
     'widget_tweaks',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

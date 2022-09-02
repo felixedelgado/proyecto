@@ -3,11 +3,14 @@
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
 
+{% block title %}Nuevo blog | Hechos con Alma{% endblock %}
+
 {% block conten %}
     
     <div class="container">
-        <form method='post'>
+        <form method='post' enctype="multipart/form-data">
             {% csrf_token %}
+            {{ form.media }}
         <h1 class="my-3 text-center">Agregar nuevo post</h1>
     
     <div class="input-group mb-3">
@@ -16,8 +19,13 @@
         {% comment %} <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> {% endcomment %}
     </div>
     <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Descripcion</span>
+        {{ form.describe|attr:'type:text'|add_class:'form-control'|attr:'aria-label:Sizing example input'|attr:'aria-describedby:inputGroup-sizing-default'}}
+        {% comment %} <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> {% endcomment %}
+    </div>
+    <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Contenido</span>
-        {{ form.content|attr:'type:text'|add_class:'form-control'|attr:'aria-label:Sizing example input'|attr:'aria-describedby:inputGroup-sizing-default'}}
+        {{ form.content|attr:'type:text'|add_class:'form-control '|attr:'aria-label:Sizing example input'|attr:'aria-describedby:inputGroup-sizing-default'}}
         {% comment %} <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> {% endcomment %}
     </div>
 
