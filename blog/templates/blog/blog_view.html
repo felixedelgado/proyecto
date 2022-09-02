@@ -22,7 +22,7 @@
         <p class="fs-2">{{ post.title }}</p>
         <p class="fw-light">{{ post.content|safe }}</p>
         {% if post.image %}
-        <img src="{{ post.image.url }}" alt="">
+        <img src="{{ post.image.url }}" style="width: 100%;" alt="">
         {% endif%}
     </div>
 
